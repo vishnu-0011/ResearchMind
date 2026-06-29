@@ -1,0 +1,46 @@
+.env
+
+# ── Python ─
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual environment ───
+venv/
+.venv/
+env/
+ENV/
+
+# ── Vector DB (ChromaDB stores here) ─────
+.chroma/
+chroma_db/
+
+# ── Jupyter notebooks ────
+.ipynb_checkpoints/
+
+# ── HuggingFace cache ────
+.cache/
+
+# ── OS files ──────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE files ───
+.vscode/
+.idea/
+*.suo
+*.user
+
+# ── Logs ─────
+*.log
+logs/
+
+# ── Uploaded docs (user PDFs at runtime) ──
+uploads/
+temp/

@@ -1,0 +1,8 @@
+langchain 
+langchain-groq 
+langgraph 
+tavily-python 
+gradio 
+python-dotenv 
+huggingface_hub 
+langsmith
