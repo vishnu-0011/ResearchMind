@@ -1,3 +1,5 @@
+# main.py
+import time
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -10,6 +12,7 @@ def run(topic: str):
     result = graph.invoke(state)
     print("\n── Final Report ──")
     print(result["final_report"])
+    time.sleep(2)
 
 if __name__ == "__main__":
     run("Artificial Intelligence in Healthcare")
