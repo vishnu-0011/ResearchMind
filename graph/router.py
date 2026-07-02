@@ -13,12 +13,12 @@ def should_retry(state: ResearchState) -> str:
     retries = state.get("retries", 0)
 
     if score >= PASS_SCORE:
-        print(f"✅ Critic passed the report with score {score}/10")
+        print(f"=> Critic passed the report with score {score}/10")
         return "done"
 
     if retries >= MAX_RETRIES:
-        print(f"⚠️ Max retries reached ({retries}). Accepting report with score {score}/10")
+        print(f"!! Max retries reached ({retries}). Accepting report with score {score}/10")
         return "done"
 
-    print(f"🔁 Critic score {score}/10 — sending back to Writer (retry {retries + 1}/{MAX_RETRIES})")
+    print(f"=> Critic score {score}/10 — sending back to Writer (retry {retries + 1}/{MAX_RETRIES})")
     return "retry"
