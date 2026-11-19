@@ -30,6 +30,9 @@ Review the following research report and score it from 1 to 10 based on:
 - Structure: does it have clear sections?
 - Depth: is it detailed enough?
 - Clarity: is it easy to read?
+- Include specific numbers, percentages, named tools, studies or organizations whenever the findings contain them
+- Cite every factual sentence
+- End the report with a "## References" section listing every source URL you cited
 
 Topic: {topic}
 

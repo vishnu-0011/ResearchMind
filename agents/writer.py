@@ -4,8 +4,8 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage
 from graph.state import ResearchState
 from config.prompts import WRITER_PROMPT
-from tools.retriever import retrieve
-
+from tools.retriever import retrieve, retrieve_multi
+from config.settings import get_llm
 
 def writer_node(state: ResearchState) -> dict:
     """
@@ -21,7 +21,15 @@ def writer_node(state: ResearchState) -> dict:
 
     # Step 1 — RAG retrieval instead of raw findings
     print(f"   Retrieving relevant chunks from vector store...")
-    retrieved = retrieve(query=topic, n_results=6)
+    queries = [
+        f"{topic} overview and definition",
+        f"{topic} applications and use cases",
+        f"{topic} statistics, studies and measurable results",
+        f"{topic} challenges, risks and ethics",
+    ]
+    if retries > 0 and feedback:
+        queries.append(f"{topic} {feedback[:300]}")
+    retrieved = retrieve_multi(queries, n_per_query=4)
 
     if not retrieved:
         # fallback to raw findings if retrieval fails
@@ -55,11 +63,7 @@ Address every point above in this new version.
         findings = context_text
     ) + retry_note
 
-    llm = ChatGroq(
-        model       = "llama-3.3-70b-versatile",
-        temperature = 0.3,
-        api_key     = os.environ["GROQ_API_KEY"]
-    )
+    llm = get_llm(temperature=0.3)
 
     response = llm.invoke([HumanMessage(content=prompt)])
     draft    = response.content

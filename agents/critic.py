@@ -4,7 +4,7 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage
 from graph.state import ResearchState
 from config.prompts import CRITIC_PROMPT
-
+from config.settings import get_llm
 
 def parse_critic_response(response_text: str) -> tuple[int, str]:
     """
@@ -49,11 +49,7 @@ def critic_node(state: ResearchState) -> dict:
     )
 
     # call Groq LLM
-    llm = ChatGroq(
-        model       = "gemma2-9b-it",
-        temperature = 0.1,    # very low temp — we want consistent scoring
-        api_key     = os.environ["GROQ_API_KEY"]
-    )
+    llm = get_llm(temperature=0.1)
     response      = llm.invoke([HumanMessage(content=prompt)])
     response_text = response.content
 
@@ -65,11 +61,8 @@ def critic_node(state: ResearchState) -> dict:
     print(f"   Score: {score}/10")
     print(f"   Feedback: {feedback[:100]}...")
 
-    # set final report if passing
-    final_report = draft if score >= 7 else ""
-
     return {
         "score":        score,
         "feedback":     feedback,
-        "final_report": final_report
+        "final_report": draft,   # always keep the latest draft; the score reports quality
     }
