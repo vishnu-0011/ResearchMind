@@ -50,7 +50,7 @@ def critic_node(state: ResearchState) -> dict:
 
     # call Groq LLM
     llm = ChatGroq(
-        model       = "llama-3.3-70b-versatile",
+        model       = "gemma2-9b-it",
         temperature = 0.1,    # very low temp — we want consistent scoring
         api_key     = os.environ["GROQ_API_KEY"]
     )
