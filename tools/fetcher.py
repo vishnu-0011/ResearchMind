@@ -1,7 +1,7 @@
 import re
 
 
-def clean_content(text: str, max_chars: int = 2000) -> str:
+def clean_content(text: str, max_chars: int = 8000) -> str:
     """
     Cleans raw web content — removes extra whitespace,
     HTML artifacts, and trims to a readable length.

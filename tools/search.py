@@ -19,7 +19,7 @@ def search_web(query: str, max_results: int = 5) -> list[dict]:
     for item in response.get("results", []):
         results.append({
             "title":   item.get("title", ""),
-            "content": item.get("content", "") or item.get("raw_content", ""),
+            "content": item.get("raw_content") or item.get("content", ""),
             "url":     item.get("url", "")
         })
 
